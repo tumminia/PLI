@@ -1,6 +1,6 @@
 # Analisi dei Percorsi Minimi in una Rete Multinodo
 
-## ?? Descrizione
+## Descrizione
 
 Questo progetto consente di analizzare i costi di percorrenza all'interno di una rete di trasporto composta da più nodi e archi ponderati. Utilizza l'algoritmo di Dijkstra su grafi non orientati per trovare i cammini minimi da diverse sorgenti e determina la configurazione più efficiente in termini di costo.
 
