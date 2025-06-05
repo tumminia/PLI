@@ -11,7 +11,11 @@ Determinare quale combinazione di nodi sorgente (A, B, C, AB, AC, BC, ABC) garan
 - la somma dei cammini minimi verso tutti gli altri nodi
 
 ## Problema
+![alt text](image002.png)
+
 ![alt text](image003.png)
+
+![alt text](image004.png)
 
 ## Tecnologie Utilizzate
 
