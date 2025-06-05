@@ -13,15 +13,15 @@ class Dijkstra:
             self.G.add_edge(i, o, weight=arco)
         
     # trova il cammino (archi) più breve 
-    def cammino_minimo(self):
-        
+    def cammino_minimo(self,str):
         paths = nx.multi_source_dijkstra_path(self.G, sources=self.sources, weight="weight")
+        print(f"Analizzando il cammino minimo di {str}")
 
         for target, path in paths.items():
             print(f"Percorso da {self.sources} a {target}: {path}")
-
-        print(f"\n")
-    
+        
+        print("\n")
+        
     # Tramite algoritmo Dijkstra trovo il cammino (archi) di ogni nodo
     def costo_minimo(self, str, x):
         print(f"{str}") 
@@ -86,6 +86,14 @@ camminiNodiAB = Dijkstra(item=itemAB, sources=sourcesAB, nodi=nodiAB)
 camminiNodiAC = Dijkstra(item=itemAC, sources=sourcesAC, nodi=nodiAC)
 camminiNodiBC = Dijkstra(item=itemBC, sources=sourcesBC, nodi=nodiBC)
 camminiNodiABC = Dijkstra(item=itemABC, sources=sourcesABC, nodi=nodiABC)
+
+camminiNodoA.cammino_minimo("A")
+camminiNodoB.cammino_minimo("B") 
+camminiNodoC.cammino_minimo("C")
+camminiNodiAB.cammino_minimo("A e B")
+camminiNodiAC.cammino_minimo("A e C")
+camminiNodiBC.cammino_minimo("B e C")
+camminiNodiABC.cammino_minimo("A, B e C")
 
 array[0]['A'] = camminiNodoA.costo_minimo("Analizziano il nodo A", x=F[0]['A'])
 array[1]['B'] = camminiNodoB.costo_minimo("Analizziano il nodo B", x=F[0]['B']) 
