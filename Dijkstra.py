@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import networkx as nx
 import pandas as pd
 
-class Dataset:
+class Dijkstra:
     def __init__(self,item, sources, nodi):
         self.G = nx.Graph()    
         self.G.add_nodes_from(item)
@@ -79,21 +79,21 @@ sourcesABC = ["A", "B", "C"]
 
 array = [{'A':0}, {'B':0}, {'C':0}, {'AB':0}, {'AC':0}, {'BC':0}, {'ABC':0}]
 
-datasetA = Dataset(item=itemA, sources=sourcesA, nodi=nodiA)
-datasetB = Dataset(item=itemB, sources=sourcesB, nodi=nodiB)
-datasetC = Dataset(item=itemC, sources=sourcesC, nodi=nodiC)
-datasetAB = Dataset(item=itemAB, sources=sourcesAB, nodi=nodiAB)
-datasetAC = Dataset(item=itemAC, sources=sourcesAC, nodi=nodiAC)
-datasetBC = Dataset(item=itemBC, sources=sourcesBC, nodi=nodiBC)
-datasetABC = Dataset(item=itemABC, sources=sourcesABC, nodi=nodiABC)
+camminiNodoA = Dijkstra(item=itemA, sources=sourcesA, nodi=nodiA)
+camminiNodoB = Dijkstra(item=itemB, sources=sourcesB, nodi=nodiB)
+camminiNodoC = Dijkstra(item=itemC, sources=sourcesC, nodi=nodiC)
+camminiNodiAB = Dijkstra(item=itemAB, sources=sourcesAB, nodi=nodiAB)
+camminiNodiAC = Dijkstra(item=itemAC, sources=sourcesAC, nodi=nodiAC)
+camminiNodiBC = Dijkstra(item=itemBC, sources=sourcesBC, nodi=nodiBC)
+camminiNodiABC = Dijkstra(item=itemABC, sources=sourcesABC, nodi=nodiABC)
 
-array[0]['A'] = datasetA.costo_minimo("Analizziano il nodo A", x=F[0]['A'])
-array[1]['B'] = datasetB.costo_minimo("Analizziano il nodo B", x=F[0]['B']) 
-array[2]['C'] = datasetC.costo_minimo("Analizziano il nodo C", x=F[0]['C'])
-array[3]['AB'] = datasetAB.costo_minimo("Analizziano i nodi A e B", x=F[0]['AB'])
-array[4]['AC'] = datasetAC.costo_minimo("Analizziano i nodi A e C", x=F[0]['AC'])
-array[5]['BC'] = datasetBC.costo_minimo("Analizziano i nodi B e C", x=F[0]['BC'])
-array[6]['ABC'] = datasetABC.costo_minimo("Analizziano i nodi A, B e C", x=F[0]['ABC'])
+array[0]['A'] = camminiNodoA.costo_minimo("Analizziano il nodo A", x=F[0]['A'])
+array[1]['B'] = camminiNodoB.costo_minimo("Analizziano il nodo B", x=F[0]['B']) 
+array[2]['C'] = camminiNodoC.costo_minimo("Analizziano il nodo C", x=F[0]['C'])
+array[3]['AB'] = camminiNodiAB.costo_minimo("Analizziano i nodi A e B", x=F[0]['AB'])
+array[4]['AC'] = camminiNodiAC.costo_minimo("Analizziano i nodi A e C", x=F[0]['AC'])
+array[5]['BC'] = camminiNodiBC.costo_minimo("Analizziano i nodi B e C", x=F[0]['BC'])
+array[6]['ABC'] = camminiNodiABC.costo_minimo("Analizziano i nodi A, B e C", x=F[0]['ABC'])
 
 min_value = float('inf')
 config_min_costo = None
@@ -115,4 +115,4 @@ posABC = {
     'Y': (1, 2),
     'Z': (1, 1),
 }
-datasetABC.grafico(pos=posABC)
+camminiNodiABC.grafico(pos=posABC)
