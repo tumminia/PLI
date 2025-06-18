@@ -15,7 +15,7 @@ class Dijkstra:
     # trova il cammino (archi) più breve 
     def cammino_minimo(self,str):
         paths = nx.multi_source_dijkstra_path(self.G, sources=self.sources, weight="weight")
-        print(f"Analizzando il cammino minimo di {str}")
+        print(f"Analizza il cammino minimo di {str}")
 
         for target, path in paths.items():
             print(f"Percorso da {self.sources} a {target}: {path}")
@@ -79,6 +79,8 @@ sourcesABC = ["A", "B", "C"]
 
 array = [{'A':0}, {'B':0}, {'C':0}, {'AB':0}, {'AC':0}, {'BC':0}, {'ABC':0}]
 
+print("\n\n")
+
 camminiNodoA = Dijkstra(item=itemA, sources=sourcesA, nodi=nodiA)
 camminiNodoB = Dijkstra(item=itemB, sources=sourcesB, nodi=nodiB)
 camminiNodoC = Dijkstra(item=itemC, sources=sourcesC, nodi=nodiC)
@@ -95,13 +97,13 @@ camminiNodiAC.cammino_minimo("A e C")
 camminiNodiBC.cammino_minimo("B e C")
 camminiNodiABC.cammino_minimo("A, B e C")
 
-array[0]['A'] = camminiNodoA.costo_minimo("Analizziano il nodo A", x=F[0]['A'])
-array[1]['B'] = camminiNodoB.costo_minimo("Analizziano il nodo B", x=F[0]['B']) 
-array[2]['C'] = camminiNodoC.costo_minimo("Analizziano il nodo C", x=F[0]['C'])
-array[3]['AB'] = camminiNodiAB.costo_minimo("Analizziano i nodi A e B", x=F[0]['AB'])
-array[4]['AC'] = camminiNodiAC.costo_minimo("Analizziano i nodi A e C", x=F[0]['AC'])
-array[5]['BC'] = camminiNodiBC.costo_minimo("Analizziano i nodi B e C", x=F[0]['BC'])
-array[6]['ABC'] = camminiNodiABC.costo_minimo("Analizziano i nodi A, B e C", x=F[0]['ABC'])
+array[0]['A'] = camminiNodoA.costo_minimo("Analizza il nodo A", x=F[0]['A'])
+array[1]['B'] = camminiNodoB.costo_minimo("Analizza il nodo B", x=F[0]['B']) 
+array[2]['C'] = camminiNodoC.costo_minimo("Analizza il nodo C", x=F[0]['C'])
+array[3]['AB'] = camminiNodiAB.costo_minimo("Analizza i nodi A e B", x=F[0]['AB'])
+array[4]['AC'] = camminiNodiAC.costo_minimo("Analizza i nodi A e C", x=F[0]['AC'])
+array[5]['BC'] = camminiNodiBC.costo_minimo("Analizza i nodi B e C", x=F[0]['BC'])
+array[6]['ABC'] = camminiNodiABC.costo_minimo("Analizza i nodi A, B e C", x=F[0]['ABC'])
 
 min_value = float('inf')
 config_min_costo = None
