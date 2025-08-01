@@ -1,4 +1,5 @@
 # Analisi dei Percorsi Minimi in una Rete Multinodo
+## File Dijkstra.py
 
 ## Descrizione
 
@@ -16,6 +17,10 @@ Determinare quale combinazione di nodi sorgente (A, B, C, AB, AC, BC, ABC) garan
 ![alt text](image003.png)
 
 ![alt text](image004.png)
+
+
+# Principal Component Analysis (PCA)
+## File PCA.py
 
 ## Tecnologie Utilizzate
 
