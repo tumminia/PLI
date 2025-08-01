@@ -19,8 +19,21 @@ Determinare quale combinazione di nodi sorgente (A, B, C, AB, AC, BC, ABC) garan
 ![alt text](image004.png)
 
 
-# Principal Component Analysis (PCA)
-## File PCA.py
+# Tecniche di pre-processing e pulizia dei dati
+
+Le tecniche di processing e pulizia dei dati hanno l’obiettivo di correggere eventuali errori, trattare i dati mancanti, uniformandone il formato. Inoltre, aiutano a selezionare le variabili più rivelanti e a ridurre la dimensionalità della struttura dei dati, per un’analisi più efficiente, migliorando le presta-zioni dei modelli.
+
+## Tecniche linerari
+- Principal Component Analysis (PCA)
+
+## Tecniche non lineari
+
+## File 
+- PCA.py
+
+## Dataset
+
+- [Mobilità urbana della città di Roma](https://romamobilita.it/it/tecnologie/open-data)
 
 ## Tecnologie Utilizzate
 
