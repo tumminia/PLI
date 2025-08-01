@@ -7,7 +7,6 @@ from sklearn.preprocessing import StandardScaler
 class PCAClass:
     def readCSV(self):
         dataset = pd.read_csv("CSV/shapes.csv")
-        
         data = pd.DataFrame(dataset)
 
         return data
@@ -15,8 +14,8 @@ class PCAClass:
     def chartWithPCA(self):
         data = self.readCSV()
 
-        columns_to_use = ["shape_pt_sequence", "shape_dist_traveled"]
-        data = data[columns_to_use].dropna()
+        columns = ["shape_pt_sequence", "shape_dist_traveled"]
+        data = data[columns].dropna()
 
         scaler = StandardScaler()
         data_scaled = scaler.fit_transform(data)
@@ -30,8 +29,8 @@ class PCAClass:
         plt.scatter(X_reconstructed[:, 0], X_reconstructed[:, 1], alpha=0.7, label='Dati ricostruiti (1 componente)')
         plt.plot([0, pca.components_[0, 0]], [0, pca.components_[0, 1]], color='red', label='Direzione PC1')
         plt.title('PCA su dati Roma (MongoDB)')
-        plt.xlabel(columns_to_use[0])
-        plt.ylabel(columns_to_use[1])
+        plt.xlabel(columns[0])
+        plt.ylabel(columns[1])
         plt.legend()
         plt.grid(True)
         plt.axis('equal')
