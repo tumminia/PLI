@@ -25,11 +25,14 @@ Le tecniche di processing e pulizia dei dati hanno l’obiettivo di correggere e
 
 ## Tecniche linerari
 - Principal Component Analysis (PCA)
+- Linear Discriminat Analysis (LDA)
+- Independent Component Analysis (ICA)
+
+## File 
+- LinearAnalysisClass.py
 
 ## Tecniche non lineari
 
-## File 
-- PCA.py
 
 ## Dataset
 
