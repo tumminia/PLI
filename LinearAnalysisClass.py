@@ -154,6 +154,6 @@ class LinearAnalysisClass:
         plt.show()
 
 linear = LinearAnalysisClass()
-#linear.analysisPCA()
-#linear.analysisICA()
+linear.analysisPCA()
+linear.analysisICA()
 linear.analysisLDA()
