@@ -14,7 +14,7 @@ class LinearAnalysisClass:
 
         return data
 
-    def chartWithPCA(self):
+    def analysisPCA(self):
         data = self.readCSV()
 
         columns = ["shape_pt_sequence", "shape_dist_traveled"]
@@ -26,75 +26,23 @@ class LinearAnalysisClass:
         pca = PCA(n_components=2)
         x_pca = pca.fit_transform(data_scaled)
         var = pca.explained_variance_ratio_
+        titolo = 'Principal Component Analysis (PCA) su dati del dataset della mobilità della città di Roma'
+        stringa = f'PCA - Dati Originali\nVarianza spiegata: {var[0]*100:.2f}% per PC1, {var[1]*100:.2f}% per PC2'
 
-        plt.figure(figsize=(12, 6))
-        plt.suptitle('Principal Component Analysis (PCA) su dati del dataset della mobilità della città di Roma', fontsize=16)
-        
-        plt.subplot(1, 2, 1)
-        plt.scatter(data_scaled[:, 0], data_scaled[:, 1], alpha=0.4, color='teal', label='Dati originali (standardizzati)')
-        plt.quiver(0, 0, pca.components_[0, 0], pca.components_[0, 1], angles="xy", scale_units="xy", scale=1)
-        plt.title(f'PCA - Dati Originali\nVarianza spiegata: {var[0]*100:.2f}% per PC1, {var[1]*100:.2f}% per PC2')
-        plt.xlabel(columns[0])
-        plt.ylabel(columns[1])
-        plt.legend()
-        plt.grid(True)
-        plt.axis('equal')
-        
+        self.chart(
+            titolo,
+            stringa,
+            data_scaled,
+            pca.components_[0, 0],
+            pca.components_[0, 1],
+            x_pca,
+            columns[0],
+            columns[1],
+            "PC1",
+            "PC2"
+        )
 
-        plt.subplot(1, 2, 2)
-        plt.scatter(x_pca[:, 0], x_pca[:, 1], color="#86160c", label="PCA Trasformati")
-        plt.title(f'PCA - Dati Trasformati\nVarianza spiegata: {var[0]*100:.2f}% per PC1, {var[1]*100:.2f}% per PC2')
-        plt.xlabel("PC1")
-        plt.ylabel("PC2")
-        plt.legend()
-        plt.grid(True)
-        plt.axis('equal')
-
-        plt.subplots_adjust(top=0.85)
-        plt.tight_layout()
-        plt.show()
-
-    def chartWithLDA(self):
-        data = self.readCSV()
-
-        columns = ["shape_pt_sequence", "shape_dist_traveled"]
-        x = data[columns].dropna()
-        y = data.loc[x.index, "shape_id"]
-
-        scaler = StandardScaler()
-        x_scaled = scaler.fit_transform(x)
-
-        lda = LDA(n_components=2)
-        x_lda = lda.fit_transform(x_scaled, y)
-        var = lda.explained_variance_ratio_
-        
-        plt.figure(figsize=(12, 6))
-        plt.suptitle('Linear Discriminat Analysis (LDA) su dati del dataset della mobilità della città di Roma', fontsize=16)
-
-        plt.subplot(1, 2, 1)
-        plt.scatter(x_scaled[:, 0], x_scaled[:, 1], alpha=0.4, color='teal', label='Dati originali (standardizzati)')
-        plt.quiver(0, 0, lda.coef_[0, 0], lda.coef_[0, 1], color='black', label='Direzione LD1')
-        plt.title(f'LDA - Dati Originali\nVarianza spiegata: {var[0]*100:.2f}% per LD1, {var[1]*100:.2f}% per LD2')
-        plt.xlabel(columns[0])
-        plt.ylabel(columns[1])
-        plt.legend()
-        plt.grid(True)
-        plt.axis('equal')
-        
-        plt.subplot(1, 2, 2)
-        plt.scatter(x_lda[:, 0], x_lda[:, 1], c=y.astype('category').cat.codes, cmap="autumn", alpha=0.7, label='LDA Trasformati')
-        plt.title(f'LDA - Dati Trasformati\nVarianza spiegata: {var[0]*100:.2f}% per LD1, {var[1]*100:.2f}% per LD2')
-        plt.xlabel("LD1")
-        plt.ylabel("LD2")
-        plt.legend()
-        plt.grid(True)
-        plt.axis('equal')
-
-        plt.subplots_adjust(top=0.85)
-        plt.tight_layout()
-        plt.show()
-    
-    def chartWithICA(self):
+    def analysisICA(self):
         data = self.readCSV()
         columns = ["shape_pt_sequence", "shape_dist_traveled"]
         data = data[columns].dropna()
@@ -106,24 +54,97 @@ class LinearAnalysisClass:
         x_ica = ica.fit_transform(data_scaled)
         cmp = np.var(x_ica, axis=0)
         var = cmp/np.sum(cmp)
+        titolo = 'Independent Component Analysis (ICA) su dati del dataset della mobilità urbana della città di Roma'
+        stringa = f'ICA - Dati Originali\nVarianza spiegata: {var[0]*100:.2f}% per PC1, {var[1]*100:.2f}% per PC2'
+
+        self.chart(
+            titolo,
+            stringa,
+            data_scaled,
+            ica.components_[0, 0],
+            ica.components_[0, 1],
+            x_ica,
+            columns[0],
+            columns[1],
+            "IC1",
+            "IC2"
+        )
+
+    def analysisLDA(self):
+        data = self.readCSV()
+
+        columns = ["shape_pt_sequence", "shape_dist_traveled"]
+        x = data[columns].dropna()
+        y = data.loc[x.index, "shape_id"]
+
+        scaler = StandardScaler()
+        data_scaled = scaler.fit_transform(x)
+
+        lda = LDA(n_components=2)
+        x_lda = lda.fit_transform(data_scaled, y)
+        var = lda.explained_variance_ratio_
+
+        titolo = 'Linear Discriminat Analysis (LDA) su dati del dataset della mobilità urbana della città di Roma'
+        stringa = f'LDA - Dati Originali\nVarianza spiegata: {var[0]*100:.2f}% per LD1, {var[1]*100:.2f}% per LD2'
 
         plt.figure(figsize=(12, 6))
-        plt.suptitle('Independent Component Analysis (ICA) su dati del dataset della mobilità della città di Roma', fontsize=16)
-        
+        plt.suptitle(titolo, fontsize=16)
+
         plt.subplot(1, 2, 1)
         plt.scatter(data_scaled[:, 0], data_scaled[:, 1], alpha=0.4, color='teal', label='Dati originali (standardizzati)')
-        plt.quiver(0, 0, ica.components_[0, 0], ica.components_[0, 1], angles="xy", scale_units="xy", scale=1)
-        plt.title(f'ICA - Dati Originali\nVarianza spiegata: {var[0]*100:.2f}% per PC1, {var[1]*100:.2f}% per PC2')
+        plt.quiver(0, 0, lda.coef_[0, 0], lda.coef_[0, 1], color='black', label='Direzione LD1')
+        plt.title(stringa)
         plt.xlabel(columns[0])
         plt.ylabel(columns[1])
         plt.legend()
         plt.grid(True)
         plt.axis('equal')
+        
         plt.subplot(1, 2, 2)
-        plt.scatter(x_ica[:, 0], x_ica[:, 1], color="#86160c", label="PCA Trasformati")
-        plt.title(f'ICA - Dati Trasformati\nVarianza spiegata: {var[0]*100:.2f}% per PC1, {var[1]*100:.2f}% per PC2')
-        plt.xlabel("IC1")
-        plt.ylabel("IC2")
+        plt.scatter(x_lda[:, 0], x_lda[:, 1], c=y.astype('category').cat.codes, cmap="autumn", alpha=0.7, label='Dati trasformati')
+        plt.title(stringa)
+        plt.xlabel("LD1")
+        plt.ylabel("LD2")
+        plt.legend()
+        plt.grid(True)
+        plt.axis('equal')
+
+        plt.subplots_adjust(top=0.85)
+        plt.tight_layout()
+        plt.show()
+        
+        plt.scatter(x_lda[:, 0], x_lda[:, 1], c=y.astype('category').cat.codes, cmap="autumn", alpha=0.7, label='Dati trasformati')
+        plt.title(stringa)
+        plt.xlabel("LD1")
+        plt.ylabel("LD2")
+        plt.colorbar(label='Dati trasformati')
+        plt.legend()
+        plt.grid(True)
+        plt.axis('equal')
+
+        plt.subplots_adjust(top=0.85)
+        plt.tight_layout()
+        plt.show()        
+
+    def chart(self, titolo, stringa, data_scaled, a, b, x, lab_1, lab_2, lab_3, lab_4):
+        plt.figure(figsize=(12, 6))
+        plt.suptitle(titolo, fontsize=16)
+        
+        plt.subplot(1, 2, 1)
+        plt.scatter(data_scaled[:, 0], data_scaled[:, 1], alpha=0.4, color='teal', label='Dati originali (standardizzati)')
+        plt.quiver(0, 0, a, b, angles="xy", scale_units="xy", scale=1)
+        plt.title(stringa)
+        plt.xlabel(lab_1)
+        plt.ylabel(lab_2)
+        plt.legend()
+        plt.grid(True)
+        plt.axis('equal')
+
+        plt.subplot(1, 2, 2)
+        plt.scatter(x[:, 0], x[:, 1], color="#86160c", label="Dati trasformati")
+        plt.title(stringa)
+        plt.xlabel(lab_3)
+        plt.ylabel(lab_4)
         plt.legend()
         plt.grid(True)
         plt.axis('equal')
@@ -133,6 +154,6 @@ class LinearAnalysisClass:
         plt.show()
 
 linear = LinearAnalysisClass()
-linear.chartWithPCA()
-linear.chartWithLDA()
-linear.chartWithICA()
+#linear.analysisPCA()
+#linear.analysisICA()
+linear.analysisLDA()
