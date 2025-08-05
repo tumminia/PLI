@@ -8,24 +8,27 @@ class LighthillWhithamRichards:
 
         return pd.DataFrame(dataset)
     
-    def calcolaVelocita(self, rho, rho_max=1.0, v_max=150):
+    def calcolaVelocita(self, rho, rho_max, v_max):
         return  v_max * (1 - rho/rho_max)
     
-    def conservazione(self, num_celle, densita, flusso, x, t):
+    def conservazione(self, num_celle, densita, flusso, dx, dt):
         nuova_densita = densita.copy()
 
         for item in range(1, num_celle-1):
-            f = (flusso[item] - flusso[item - 1])/x
-            nuova_densita[item] = densita[item] - t * f
+            f = (flusso[item] - flusso[item - 1])/dx
+            nuova_densita[item] = densita[item] - dt * f
 
             if nuova_densita[item]<0:
                 nuova_densita[item] = 0
-            
+        
+        nuova_densita[0] = densita[0]
+        nuova_densita[-1] = densita[-1]
+
         return nuova_densita
     
-    def stampaStatoTraffico(self,  densita, flusso, tempo):
+    def stampaStatoTraffico(self,  densita, flusso):
         for i in range(len(densita)):
-            print(f"Tempo: {tempo[i]}\nDensità: {densita[i]}\nFlusso: {flusso[i]}\n")
+            print(f"Tempo: {i}\nDensità: {densita[i]}\nFlusso: {flusso[i]}\n")
 
     def chart(self, d_osservata, f_osservato, d_simulata, f_simulato):
 
@@ -56,19 +59,24 @@ class LighthillWhithamRichards:
     def analizzaTraffico(self):
         data = self.leggiDati()
         num_celle = len(data)
-        x = 1.0
-        t = 0.01
-        rho_max = 1.0
-        densita = data['densita'].to_list()
-        tempo = data['t'].to_list()
+        x = 690.0
+        dx = x/(num_celle - 1)
+        dt = 0.01
+        rho_max = 150.0
+        v_max = 70 * (1/3.6)
+        densita = data['densita'].to_numpy()
+
+        if v_max  * (dt/dx)>1:
+            raise ValueError(f"Condizione CFL non soddisfatta: ridurre dt o aumentare dx")
+
 
         #for t in tempo:
         for _ in range(100):
-            flusso = [d * self.calcolaVelocita(d, rho_max) for d in densita]
-            densita = self.conservazione(num_celle, densita, flusso, x, t)
-            
-        self.stampaStatoTraffico(densita, flusso, tempo)
-
+            velocita =self.calcolaVelocita(densita, rho_max, v_max)
+            flusso = densita * velocita
+            densita = self.conservazione(num_celle, densita, flusso, dx, dt)
+        
+        self.stampaStatoTraffico(densita, flusso)
         self.chart(data['densita'].to_list(), data["flusso"].to_list(), densita, flusso)
 
 lwr = LighthillWhithamRichards()
