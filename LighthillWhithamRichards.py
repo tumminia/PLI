@@ -66,9 +66,7 @@ class LighthillWhithamRichards:
 
         if v_max  * (dt/dx)>1:
             raise ValueError(f"Condizione CFL non soddisfatta: ridurre dt o aumentare dx")
-
-
-        #for t in tempo:
+        
         for _ in range(100):
             velocita =self.calcolaVelocita(densita, rho_max, v_max)
             flusso = densita * velocita

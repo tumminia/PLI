@@ -31,12 +31,11 @@ Le tecniche di processing e pulizia dei dati hanno l’obiettivo di correggere e
 ## File 
 - LinearAnalysisClass.py
 
-## Tecniche non lineari
-
-
 ## Dataset
 
 - [Mobilità urbana della città di Roma](https://romamobilita.it/it/tecnologie/open-data)
+
+# Modello Lighthill Whitham Richards
 
 ## Tecnologie Utilizzate
 
