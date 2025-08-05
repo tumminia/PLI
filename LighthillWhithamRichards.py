@@ -37,7 +37,7 @@ class LighthillWhithamRichards:
 
         plt.subplot(1, 2, 1)
         plt.plot(d_osservata, f_osservato, alpha=0.7, color='teal', label=f'Flusso osservato')
-        plt.title(f"Flusso osservato")
+        plt.title("Flusso osservato")
         plt.xlabel("Densità (veicoli/km)")
         plt.ylabel("Flusso (veicoli/km)")
         plt.legend()
@@ -45,16 +45,14 @@ class LighthillWhithamRichards:
 
         plt.subplot(1, 2, 2)
         plt.plot(d_simulata, f_simulato, alpha=0.7, color="red", label="Flusso simulato (LWR)")
-        plt.title(f"Flusso simulato (LWR)")
+        plt.title("Flusso simulato (LWR)")
         plt.xlabel("Densità (veicoli/km)")
         plt.ylabel("Flusso (veicoli/km)")
         plt.legend()
         plt.grid(True)
 
-        #plt.axis("equal")
         plt.tight_layout()
         plt.show()
-
 
     def analizzaTraffico(self):
         data = self.leggiDati()
