@@ -33,6 +33,7 @@ Le tecniche di processing e pulizia dei dati hanno l’obiettivo di correggere e
 
 ## Dataset
 
+- [Traffic Flow Data Jan to June 2023 SDCC](https://data.smartdublin.ie/dataset/traffic-flow-data-jan-to-june-2023-sdcc1)
 - [Mobilità urbana della città di Roma](https://romamobilita.it/it/tecnologie/open-data)
 
 # Modello Lighthill Whitham Richards
@@ -43,6 +44,7 @@ Le tecniche di processing e pulizia dei dati hanno l’obiettivo di correggere e
 - [NetworkX](https://networkx.org/) — per la creazione e l'analisi del grafo
 - [Matplotlib](https://matplotlib.org/) — per la visualizzazione del grafo
 - [Pandas](https://pandas.pydata.org/) — per la gestione dei dati da file CSV
+- [Sklearn](https://scikit-learn.org/stable/)
 
 ```bash
 git clone https://github.com/tumminia/PLI
