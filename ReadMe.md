@@ -44,7 +44,7 @@ Le tecniche di processing e pulizia dei dati hanno l’obiettivo di correggere e
 - [NetworkX](https://networkx.org/) — per la creazione e l'analisi del grafo
 - [Matplotlib](https://matplotlib.org/) — per la visualizzazione del grafo
 - [Pandas](https://pandas.pydata.org/) — per la gestione dei dati da file CSV
-- [Sklearn](https://scikit-learn.org/stable/)
+- [Sklearn](https://scikit-learn.org/stable/) per la riduzione della dimensionalità dei dati
 
 ```bash
 git clone https://github.com/tumminia/PLI
