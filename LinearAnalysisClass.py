@@ -75,8 +75,8 @@ class LinearAnalysisClass:
 
         plt.scatter(x_lda[:, 0], x_lda[:, 1], c=y.astype('category').cat.codes, cmap="autumn", alpha=0.7, label='Dati trasformati')
         plt.title(f"{titolo}\n{stringa}")
-        plt.xlabel("Flusso")
-        plt.ylabel("Congestione")
+        plt.xlabel(self.lab_x)
+        plt.ylabel(self.lab_y)
         plt.colorbar(label='Dati trasformati')
         plt.legend()
         plt.grid(True)
@@ -113,6 +113,7 @@ class LinearAnalysisClass:
         plt.tight_layout()
         plt.show()
 
+"""
 roma = LinearAnalysisClass("CSV/shapes.csv", "città di Roma", "shape_pt_sequence", "shape_dist_traveled")
 roma.analysisPCA("shape_pt_sequence", "shape_dist_traveled")
 roma.analysisICA("shape_pt_sequence", "shape_dist_traveled")
@@ -122,3 +123,9 @@ dublino = LinearAnalysisClass("CSV/Traffic_Flow_Data_Jan_to_June_2023_SDCC.csv",
 dublino.analysisPCA("flow", "cong")
 dublino.analysisICA("flow", "cong")
 dublino.analysisLDA("flow", "cong", "day")
+"""
+
+e17 = LinearAnalysisClass("CSV/E17.csv", "Autostrda E17, tunnel Kennedy, Anversa, Belgio ", "Densità", "Velocità")
+e17.analysisPCA("densita", "velocita")
+e17.analysisICA("densita", "velocita")
+e17.analysisLDA("densita", "velocita", "id")
