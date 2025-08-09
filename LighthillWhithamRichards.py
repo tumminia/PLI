@@ -56,25 +56,24 @@ class LighthillWhithamRichards:
     def analizzaTraffico(self, uri, v):
         data = self.leggiDati(uri)
         num_celle = len(data)
-        x = 8000.0
-        dx = x#/(num_celle - 1)
-        dt = 1
-        rho_max = 150.0
-        v_max = v * (1/3.6)
+        dx = 8000.0 # distanza in metri
+        v_max = v * (1/3.6) # velocità massima, converte da km/h a m/s
+        dt = dx/v_max # tempo per percorrere dx
+        c_max = 3600/dt # capacità massima (veicoli/ora/corsia)
+        rho_max = c_max/v_max # densità massima
         
-        densita = data["densita"].to_numpy()
+        densita = data["densita"].to_list()
         data["flusso"] =  data["densita"] * data["velocita"]
-
+        
         if v_max  * (dt/dx)>1:
             raise ValueError(f"Condizione CFL non soddisfatta: ridurre dt o aumentare dx")
         
         for _ in range(100):
-            velocita = self.calcolaVelocita(densita, rho_max, v_max)
-            flusso = densita * velocita
+            velocita = [self.calcolaVelocita(d, rho_max, v_max) for d in densita]
+            flusso = [d * v for d,v in zip(densita, velocita)]
             densita = self.conservazione(num_celle, densita, flusso, dx, dt)
         
-        #self.stampaStatoTraffico(densita, flusso)
-        
+        self.stampaStatoTraffico(densita, flusso)
         self.chart(
             data["densita"].to_list(),
             data["flusso"].to_list(),
@@ -89,6 +88,6 @@ class LighthillWhithamRichards:
         )
 
 lwr = LighthillWhithamRichards()
-lwr.analizzaTraffico("CSV/E17_flusso_alto.csv", 34)
+lwr.analizzaTraffico("CSV/E17_flusso_alto.csv", 37)
 lwr.analizzaTraffico("CSV/E17_flusso_medio.csv", 72)
 lwr.analizzaTraffico("CSV/E17_flusso_basso.csv", 120)
