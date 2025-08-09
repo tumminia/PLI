@@ -2,12 +2,9 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.preprocessing import StandardScaler
 
-class LighthillWhithamRichards:
-    def __init__(self, uri):
-        self.uri = uri
-        
-    def leggiDati(self):
-        dataset = pd.read_csv(self.uri)
+class LighthillWhithamRichards:    
+    def leggiDati(self, uri):
+        dataset = pd.read_csv(uri)
 
         return pd.DataFrame(dataset)
     
@@ -56,14 +53,14 @@ class LighthillWhithamRichards:
         plt.tight_layout()
         plt.show()
 
-    def analizzaTraffico(self):
-        data = self.leggiDati()
+    def analizzaTraffico(self, uri, v):
+        data = self.leggiDati(uri)
         num_celle = len(data)
         x = 8000.0
-        dx = x/(num_celle - 1)
-        dt = 0.0001
+        dx = x#/(num_celle - 1)
+        dt = 1
         rho_max = 150.0
-        v_max = 120 * (1/3.6)
+        v_max = v * (1/3.6)
         
         densita = data["densita"].to_numpy()
         data["flusso"] =  data["densita"] * data["velocita"]
@@ -76,7 +73,7 @@ class LighthillWhithamRichards:
             flusso = densita * velocita
             densita = self.conservazione(num_celle, densita, flusso, dx, dt)
         
-        self.stampaStatoTraffico(densita, flusso)
+        #self.stampaStatoTraffico(densita, flusso)
         
         self.chart(
             data["densita"].to_list(),
@@ -91,5 +88,7 @@ class LighthillWhithamRichards:
             "Modello Lighthill Whitham Richards applicato sull'autostrada E17, tunnel Kennedy, Anversa, Belgio"
         )
 
-lwr = LighthillWhithamRichards("CSV/E17.csv")
-lwr.analizzaTraffico()
+lwr = LighthillWhithamRichards()
+lwr.analizzaTraffico("CSV/E17_flusso_alto.csv", 34)
+lwr.analizzaTraffico("CSV/E17_flusso_medio.csv", 72)
+lwr.analizzaTraffico("CSV/E17_flusso_basso.csv", 120)
