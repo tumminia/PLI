@@ -79,9 +79,9 @@ class LighthillWhithamRichards:
             raise ValueError(f"Condizione CFL non soddisfatta: ridurre dt o aumentare dx")
         
         for _ in range(100):
-            # calcola velocità di ogni cella
+            # calcola la velocità di ogni cella
             velocita = [self.calcolaVelocita(d, rho_max, v_max) for d in densita]
-            # aggiorna il flusso
+            # calcola il flusso di ogni cella
             flusso = [d * v for d,v in zip(densita, velocita)]
             # aggiorna la densità con l'equazione della conservazione
             densita = self.conservazione(num_celle, densita, flusso, dx, dt) 
@@ -93,7 +93,7 @@ class LighthillWhithamRichards:
             data["densita"].to_list(),
             data["flusso"].to_list(),
             data["t"].to_list(),
-            "Densità e Flusso del traffico in periodo di tempo t"
+            "Densità e Flusso del traffico in un periodo di tempo t"
         )
         # crea un grafico della densità e del flusso, estrapolati dalla simulazione
         self.chart(
@@ -105,5 +105,5 @@ class LighthillWhithamRichards:
 
 lwr = LighthillWhithamRichards()
 lwr.analizzaTraffico("CSV/E17_flusso_alto.csv", 25)
-lwr.analizzaTraffico("CSV/E17_flusso_medio.csv", 72)
+lwr.analizzaTraffico("CSV/E17_flusso_medio.csv", 85)
 lwr.analizzaTraffico("CSV/E17_flusso_basso.csv", 120)
