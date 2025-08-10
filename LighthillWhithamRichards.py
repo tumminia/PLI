@@ -71,6 +71,7 @@ class LighthillWhithamRichards:
         rho_max = c_max/v_max # densità massima
         
         densita = data["densita"].to_list()
+        #calcola il flusso
         data["flusso"] =  data["densita"] * data["velocita"]
         
         # controlla la condizione CFL, che deve avere un valore minore uguale a 1
@@ -80,7 +81,7 @@ class LighthillWhithamRichards:
         for _ in range(100):
             # calcola velocità di ogni cella
             velocita = [self.calcolaVelocita(d, rho_max, v_max) for d in densita]
-            # 
+            # aggiorna il flusso
             flusso = [d * v for d,v in zip(densita, velocita)]
             # aggiorna la densità con l'equazione della conservazione
             densita = self.conservazione(num_celle, densita, flusso, dx, dt) 
@@ -103,6 +104,6 @@ class LighthillWhithamRichards:
         )
 
 lwr = LighthillWhithamRichards()
-lwr.analizzaTraffico("CSV/E17_flusso_alto.csv", 15)
+lwr.analizzaTraffico("CSV/E17_flusso_alto.csv", 25)
 lwr.analizzaTraffico("CSV/E17_flusso_medio.csv", 50)
 lwr.analizzaTraffico("CSV/E17_flusso_basso.csv", 120)
