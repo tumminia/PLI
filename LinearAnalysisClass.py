@@ -124,7 +124,7 @@ dublino.analysisPCA("flow", "cong")
 dublino.analysisICA("flow", "cong")
 dublino.analysisLDA("flow", "cong", "day")
 
-e17 = LinearAnalysisClass("CSV/E17_flusso_alto.csv", "Autostrda E17, tunnel Kennedy, Anversa, Belgio ", "Densità", "Velocità")
+e17 = LinearAnalysisClass("CSV/E17.csv", "Autostrda E17, tunnel Kennedy, Anversa, Belgio ", "Densità", "Velocità")
 e17.analysisPCA("densita", "velocita")
 e17.analysisICA("densita", "velocita")
 e17.analysisLDA("densita", "velocita", "id")

@@ -38,13 +38,18 @@ Le tecniche di processing e pulizia dei dati hanno l’obiettivo di correggere e
 
 # Modello Lighthill Whitham Richards
 
+Analisi macroscopica con il modello Lighthill Whitham Richards nei pressi dell'autostrada E17 nelle vicinanze del tunnel Kennedy ad Anversa in Belgio con dati estrati con simulazione con software SUMO (Simulation of Urban Mobility).
+
+
 ## Tecnologie Utilizzate
 
 - Python 3
 - [NetworkX](https://networkx.org/) — per la creazione e l'analisi del grafo
 - [Matplotlib](https://matplotlib.org/) — per la visualizzazione del grafo
+- [OSM Web Wizard](https://www.openstreetmap.org/#map=)
 - [Pandas](https://pandas.pydata.org/) — per la gestione dei dati da file CSV
 - [Sklearn](https://scikit-learn.org/stable/) per la riduzione della dimensionalità dei dati
+- [SUMO (Simulation of Urban Mobility)](https://sumo.dlr.de/docs/index.html)
 
 ```bash
 git clone https://github.com/tumminia/PLI
