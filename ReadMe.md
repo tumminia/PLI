@@ -53,10 +53,10 @@ Analisi macroscopica con il modello Lighthill Whitham Richards nei pressi dell'a
 - Python 3
 - [NetworkX](https://networkx.org/) — per la creazione e l'analisi del grafo
 - [Matplotlib](https://matplotlib.org/) — per la visualizzazione del grafo
-- [OSM Web Wizard](https://www.openstreetmap.org/#map=)
+- [OSM Web Wizard](https://www.openstreetmap.org/#map=) — crea mappe personalizzate
 - [Pandas](https://pandas.pydata.org/) — per la gestione dei dati da file CSV
 - [Sklearn](https://scikit-learn.org/stable/) per la riduzione della dimensionalità dei dati
-- [SUMO (Simulation of Urban Mobility)](https://sumo.dlr.de/docs/index.html)
+- [SUMO (Simulation of Urban Mobility)](https://sumo.dlr.de/docs/index.html) — Software per la simulazione della mobilità urbana
 
 ```bash
 git clone https://github.com/tumminia/PLI
