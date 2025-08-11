@@ -55,7 +55,7 @@ Analisi macroscopica con il modello Lighthill Whitham Richards nei pressi dell'a
 - [Matplotlib](https://matplotlib.org/) — per la visualizzazione del grafo
 - [OSM Web Wizard](https://www.openstreetmap.org/#map=) — crea mappe personalizzate
 - [Pandas](https://pandas.pydata.org/) — per la gestione dei dati da file CSV
-- [Sklearn](https://scikit-learn.org/stable/) per la riduzione della dimensionalità dei dati
+- [Sklearn](https://scikit-learn.org/stable/) — per la riduzione della dimensionalità dei dati
 - [SUMO (Simulation of Urban Mobility)](https://sumo.dlr.de/docs/index.html) — Software per la simulazione della mobilità urbana
 
 ```bash
