@@ -22,6 +22,8 @@ Determinare quale combinazione di nodi sorgente (A, B, C, AB, AC, BC, ABC) garan
 
 # Tecniche di pre-processing e pulizia dei dati
 
+## Descrizione
+
 Le tecniche di processing e pulizia dei dati hanno l’obiettivo di correggere eventuali errori, trattare i dati mancanti, uniformandone il formato. Inoltre, aiutano a selezionare le variabili più rivelanti e a ridurre la dimensionalità della struttura dei dati, per un’analisi più efficiente, migliorando le presta-zioni dei modelli.
 
 ## Tecniche linerari
@@ -39,8 +41,12 @@ Le tecniche di processing e pulizia dei dati hanno l’obiettivo di correggere e
 
 # Modello Lighthill Whitham Richards
 
+## Descrizione
+
 Analisi macroscopica con il modello Lighthill Whitham Richards nei pressi dell'autostrada E17 nelle vicinanze del tunnel Kennedy ad Anversa in Belgio con dati estratti con una simulazione con il software SUMO (Simulation of Urban Mobility).
 
+## File
+- LighthillWhithamRichards.py
 
 ## Tecnologie Utilizzate
 
