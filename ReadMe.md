@@ -38,7 +38,7 @@ Le tecniche di processing e pulizia dei dati hanno l’obiettivo di correggere e
 
 # Modello Lighthill Whitham Richards
 
-Analisi macroscopica con il modello Lighthill Whitham Richards nei pressi dell'autostrada E17 nelle vicinanze del tunnel Kennedy ad Anversa in Belgio con dati estrati con simulazione con software SUMO (Simulation of Urban Mobility).
+Analisi macroscopica con il modello Lighthill Whitham Richards nei pressi dell'autostrada E17 nelle vicinanze del tunnel Kennedy ad Anversa in Belgio con dati estratti con una simulazione con il software SUMO (Simulation of Urban Mobility).
 
 
 ## Tecnologie Utilizzate
