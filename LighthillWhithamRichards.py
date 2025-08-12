@@ -104,6 +104,6 @@ class LighthillWhithamRichards:
         )
 
 lwr = LighthillWhithamRichards()
-lwr.analizzaTraffico("CSV/E17_flusso_alto.csv", 30)
-lwr.analizzaTraffico("CSV/E17_flusso_medio.csv", 60)
-lwr.analizzaTraffico("CSV/E17_flusso_basso.csv", 120)
+lwr.analizzaTraffico("CSV/lwr/E17_flusso_alto.csv", 30)
+lwr.analizzaTraffico("CSV/lwr/E17_flusso_medio.csv", 68)
+lwr.analizzaTraffico("CSV/lwr/E17_flusso_basso.csv", 120)

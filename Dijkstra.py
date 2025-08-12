@@ -52,13 +52,13 @@ class Dijkstra:
         plt.show()
 
 # Aggiungiamo gli archi (strade o tratte di trasporto pubblico) con costi (tempi di percorrenza)
-nodiA = pd.read_csv("CSV/a.csv")
-nodiB = pd.read_csv("CSV/b.csv")
-nodiC = pd.read_csv("CSV/c.csv")
-nodiAB = pd.read_csv("CSV/ab.csv")
-nodiAC = pd.read_csv("CSV/ac.csv")
-nodiBC = pd.read_csv("CSV/bc.csv")
-nodiABC = pd.read_csv("CSV/abc.csv")
+nodiA = pd.read_csv("CSV/dijkstra/a.csv")
+nodiB = pd.read_csv("CSV/dijkstra/b.csv")
+nodiC = pd.read_csv("CSV/dijkstra/c.csv")
+nodiAB = pd.read_csv("CSV/dijkstra/ab.csv")
+nodiAC = pd.read_csv("CSV/dijkstra/ac.csv")
+nodiBC = pd.read_csv("CSV/dijkstra/bc.csv")
+nodiABC = pd.read_csv("CSV/dijkstra/abc.csv")
 
 itemA = ["A", "W", "X", "Y", "Z"]
 itemB = ["B", "W", "X", "Y", "Z"]
