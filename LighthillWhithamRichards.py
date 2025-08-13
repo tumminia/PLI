@@ -61,7 +61,7 @@ class LighthillWhithamRichards:
         plt.show()
     
     # estrae e analizza i dati
-    def analizzaTraffico(self, uri, v, densitaID, velocitaID, tempoID):
+    def analizzaTraffico(self, uri, v, densitaID, velocitaID, tempoID, titolo):
         data = self.leggiDati(uri) # legge dati
         num_celle = len(data)
         dx = 8000.0 # distanza in metri
@@ -100,10 +100,15 @@ class LighthillWhithamRichards:
             densita,
             flusso,
             data[tempoID].to_list(),
-            "Modello Lighthill Whitham Richards applicato sull'autostrada E17, tunnel Kennedy, Anversa, Belgio"
+            titolo
         )
 
 lwr = LighthillWhithamRichards()
-lwr.analizzaTraffico("CSV/lwr/E17_flusso_alto.csv", 30, "densita", "velocita", "t")
-lwr.analizzaTraffico("CSV/lwr/E17_flusso_medio.csv", 68, "densita", "velocita", "t")
-lwr.analizzaTraffico("CSV/lwr/E17_flusso_basso.csv", 120, "densita", "velocita", "t")
+
+tit1 = f"Analisi del traffico urbano congestionato con il modello LWR, nei pressi dell'autostrada E17 (tunnel Kennedy) ad Anversa in Belgio."
+tit2 = f"Analisi del traffico urbano scorrevole con il modello LWR, nei pressi dell'autostrada E17 (tunnel Kennedy) ad Anversa in Belgio."
+tit3 = f"Analisi del traffico urbano libero con il modello LWR, nei pressi dell'autostrada E17 (tunnel Kennedy) ad Anversa in Belgio."
+
+lwr.analizzaTraffico("CSV/lwr/E17_flusso_alto.csv", 30, "densita", "velocita", "t", tit1)
+lwr.analizzaTraffico("CSV/lwr/E17_flusso_medio.csv", 68, "densita", "velocita", "t", tit2)
+lwr.analizzaTraffico("CSV/lwr/E17_flusso_basso.csv", 120, "densita", "velocita", "t", tit3)
