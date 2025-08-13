@@ -61,7 +61,7 @@ class LighthillWhithamRichards:
         plt.show()
     
     # estrae e analizza i dati
-    def analizzaTraffico(self, uri, v):
+    def analizzaTraffico(self, uri, v, densitaID, velocitaID, tempoID):
         data = self.leggiDati(uri) # legge dati
         num_celle = len(data)
         dx = 8000.0 # distanza in metri
@@ -70,9 +70,9 @@ class LighthillWhithamRichards:
         c_max = 3600/dt # capacità massima (veicoli/ora/corsia)
         rho_max = c_max/v_max # densità massima
         
-        densita = data["densita"].to_list()
+        densita = data[densitaID].to_list()
         #calcola il flusso
-        data["flusso"] =  data["densita"] * data["velocita"]
+        data["flusso"] =  data[densitaID] * data[velocitaID]
         
         # controlla la condizione CFL, che deve avere un valore minore uguale a 1
         if v_max  * (dt/dx)>1:
@@ -90,20 +90,20 @@ class LighthillWhithamRichards:
         self.stampaStatoTraffico(densita, flusso)
         # crea un grafico della densità e del flusso dei dati dal file csv
         self.chart(
-            data["densita"].to_list(),
+            data[densitaID].to_list(),
             data["flusso"].to_list(),
-            data["t"].to_list(),
+            data[tempoID].to_list(),
             "Densità e Flusso del traffico in un periodo di tempo t"
         )
         # crea un grafico della densità e del flusso, estrapolati dalla simulazione
         self.chart(
             densita,
             flusso,
-            data["t"].to_list(),
+            data[tempoID].to_list(),
             "Modello Lighthill Whitham Richards applicato sull'autostrada E17, tunnel Kennedy, Anversa, Belgio"
         )
 
 lwr = LighthillWhithamRichards()
-lwr.analizzaTraffico("CSV/lwr/E17_flusso_alto.csv", 30)
-lwr.analizzaTraffico("CSV/lwr/E17_flusso_medio.csv", 68)
-lwr.analizzaTraffico("CSV/lwr/E17_flusso_basso.csv", 120)
+lwr.analizzaTraffico("CSV/lwr/E17_flusso_alto.csv", 30, "densita", "velocita", "t")
+lwr.analizzaTraffico("CSV/lwr/E17_flusso_medio.csv", 68, "densita", "velocita", "t")
+lwr.analizzaTraffico("CSV/lwr/E17_flusso_basso.csv", 120, "densita", "velocita", "t")
