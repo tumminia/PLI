@@ -92,7 +92,7 @@ class LighthillWhithamRichards:
         # crea un grafico della densità e del flusso dei dati dal file csv
         self.chart(
             data[densitaID].to_list(),
-            data["flusso"].to_list(),
+            data[flussoID].to_list(),
             data[tempoID].to_list(),
             "Densità e Flusso del traffico in un periodo di tempo t"
         )
