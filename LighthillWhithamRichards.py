@@ -61,7 +61,7 @@ class LighthillWhithamRichards:
         plt.show()
     
     # estrae e analizza i dati
-    def analizzaTraffico(self, uri, v, densitaID, velocitaID, tempoID, titolo):
+    def analizzaTraffico(self, uri, v, densitaID, flussoID, velocitaID, tempoID, titolo):
         data = self.leggiDati(uri) # legge dati
         num_celle = len(data)
         dx = 8000.0 # distanza in metri
@@ -71,8 +71,9 @@ class LighthillWhithamRichards:
         rho_max = c_max/v_max # densità massima
         
         densita = data[densitaID].to_list()
+        
         #calcola il flusso
-        data["flusso"] =  data[densitaID] * data[velocitaID]
+        data[flussoID] =  data[densitaID] * data[velocitaID]
         
         # controlla la condizione CFL, che deve avere un valore minore uguale a 1
         if v_max  * (dt/dx)>1:
@@ -109,6 +110,6 @@ tit1 = f"Analisi del traffico urbano congestionato con il modello LWR, nei press
 tit2 = f"Analisi del traffico urbano scorrevole con il modello LWR, nei pressi dell'autostrada E17 (tunnel Kennedy) ad Anversa in Belgio."
 tit3 = f"Analisi del traffico urbano libero con il modello LWR, nei pressi dell'autostrada E17 (tunnel Kennedy) ad Anversa in Belgio."
 
-lwr.analizzaTraffico("CSV/lwr/E17_flusso_alto.csv", 30, "densita", "velocita", "t", tit1)
-lwr.analizzaTraffico("CSV/lwr/E17_flusso_medio.csv", 68, "densita", "velocita", "t", tit2)
-lwr.analizzaTraffico("CSV/lwr/E17_flusso_basso.csv", 120, "densita", "velocita", "t", tit3)
+lwr.analizzaTraffico("CSV/lwr/E17_flusso_alto.csv", 30, "densita", "flusso", "velocita", "t", tit1)
+lwr.analizzaTraffico("CSV/lwr/E17_flusso_medio.csv", 68, "densita", "flusso", "velocita", "t", tit2)
+lwr.analizzaTraffico("CSV/lwr/E17_flusso_basso.csv", 120, "densita", "flusso", "velocita", "t", tit3)
