@@ -1,5 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots as sub
 
 # La classe  LighthillWhithamRichards contiene tutti metodi per l’analisi e implementazione del modello LWR
 class LighthillWhithamRichards:
@@ -59,7 +61,35 @@ class LighthillWhithamRichards:
 
         plt.tight_layout()
         plt.show()
-    
+
+    def chart2(self, densita, flusso, periodo, titolo):
+        fig = sub(rows=1, cols=2, subplot_titles=("Densità in un periodo di tempo t(s)", "Flusso in un periodo di tempo t(s)"))
+        fig.add_trace(go.Scatter(
+            x=periodo,
+            y=densita,
+            mode='lines',
+            name='Densità in un periodo di tempo t(s)',
+            line=dict(color='teal')),
+            row=1,
+            col=1)
+        fig.update_xaxes(title_text="Tempo in periodo da 0 a t (s)", row=1, col=1)
+        fig.update_yaxes(title_text="Densità (veicoli/km)",  row=1, col=1)
+
+        fig.add_trace(go.Scatter(
+            x=periodo,
+            y=flusso,
+            mode='lines',
+            name='Densità in un periodo di tempo t(s)',
+            line=dict(color='red')),
+            row=1,
+            col=2)
+        
+        fig.update_xaxes(title_text="Tempo in periodo da 0 a t (s)", row=1, col=2)
+        fig.update_yaxes(title_text="Flusso (veicoli/km)",  row=1, col=2)
+
+        fig.update_layout(title_text=titolo, width=1300, height=600)
+        fig.show()
+
     # estrae e analizza i dati
     def analizzaTraffico(self, uri, v, densitaID, flussoID, velocitaID, tempoID, titolo):
         data = self.leggiDati(uri) # legge dati
@@ -96,8 +126,15 @@ class LighthillWhithamRichards:
             data[tempoID].to_list(),
             "Densità e Flusso del traffico in un periodo di tempo t"
         )
-        # crea un grafico della densità e del flusso, estrapolati dalla simulazione
+        # crea un grafico della densità e del flusso, estrapolati dalla simulazione libreria matplotlib
         self.chart(
+            densita,
+            flusso,
+            data[tempoID].to_list(),
+            titolo
+        )
+        # crea un grafico della densità e del flusso, estrapolati dalla simulazione libreria plot
+        self.chart2(
             densita,
             flusso,
             data[tempoID].to_list(),
