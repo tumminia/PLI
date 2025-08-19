@@ -55,7 +55,7 @@ class LighthillWhithamRichards:
         plt.plot(periodo, flusso, alpha=0.7, color="red", label="Flusso in un periodo t(s)")
         plt.title("Flusso in un periodo di tempo t(s)")
         plt.xlabel("Tempo in periodo da 0 a t (s)")
-        plt.ylabel("Flusso (veicoli/km)")
+        plt.ylabel("Flusso (veicoli/h)")
         plt.legend()
         plt.grid(True)
 
@@ -85,7 +85,7 @@ class LighthillWhithamRichards:
             col=2)
         
         fig.update_xaxes(title_text="Tempo in periodo da 0 a t (s)", row=1, col=2)
-        fig.update_yaxes(title_text="Flusso (veicoli/km)",  row=1, col=2)
+        fig.update_yaxes(title_text="Flusso (veicoli/h)",  row=1, col=2)
 
         fig.update_layout(title_text=titolo, width=1300, height=600)
         fig.show()
