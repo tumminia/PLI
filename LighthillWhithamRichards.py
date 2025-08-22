@@ -5,7 +5,7 @@ from plotly.subplots import make_subplots as sub
 
 # La classe  LighthillWhithamRichards contiene tutti metodi per l’analisi e implementazione del modello LWR
 class LighthillWhithamRichards:
-    # legge i da un file .csv
+    # legge i dati da un file in formato csv
     def leggiDati(self, uri):
         dataset = pd.read_csv(uri)
 
