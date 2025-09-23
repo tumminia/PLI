@@ -137,7 +137,20 @@ dublino.analysisPCA("flow", "cong")
 dublino.analysisICA("flow", "cong")
 dublino.analysisLDA("flow", "cong", "day")
 
-e17 = LinearAnalysisClass("CSV/lwr/E17.csv", "Autostrda E17, tunnel Kennedy, Anversa, Belgio ", "Densità", "Velocità")
-e17.analysisPCA("densita", "velocita")
-e17.analysisICA("densita", "velocita")
-e17.analysisLDA("densita", "velocita", "id")
+# traffico libero
+e17_basso = LinearAnalysisClass("CSV/lwr/E17_flusso_basso.csv", "città di Anversa, Belgio", "Densità", "Velocità")
+e17_basso.analysisPCA("densita", "velocita")
+e17_basso.analysisICA("densita", "velocita")
+e17_basso.analysisLDA("densita", "velocita", "id")
+
+# traffcio scorrevole
+e17_medio = LinearAnalysisClass("CSV/lwr/E17_flusso_medio.csv", "città di Anversa, Belgio", "Densità", "Velocità")
+e17_medio.analysisPCA("densita", "velocita")
+e17_medio.analysisICA("densita", "velocita")
+e17_medio.analysisLDA("densita", "velocita", "id")
+
+# traffico congestionato
+e17_alto = LinearAnalysisClass("CSV/lwr/E17_flusso_alto.csv", "città di Anversa, Belgio", "Densità", "Velocità")
+e17_alto.analysisPCA("densita", "velocita")
+e17_alto.analysisICA("densita", "velocita")
+e17_alto.analysisLDA("densita", "velocita", "id")
