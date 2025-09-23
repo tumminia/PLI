@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+from sklearn.cluster import KMeans
 from sklearn.decomposition import PCA
 from sklearn.decomposition import FastICA as ICA
 from sklearn.preprocessing import StandardScaler
@@ -56,13 +57,15 @@ class LinearAnalysisClass:
 
     def analysisLDA(self, uno, due, tre):
         data = self.readData()
-
+        
         columns = [uno, due]
         x = data[columns].dropna()
         y = data.loc[x.index, tre]
 
         scaler = StandardScaler()
         data_scaled = scaler.fit_transform(x)
+        kmeans = self.kmeans_algorithm()
+        y_kmeans = kmeans.fit_predict(data_scaled)
 
         lda = LDA(n_components=2)
         x_lda = lda.fit_transform(data_scaled, y)
@@ -73,7 +76,8 @@ class LinearAnalysisClass:
 
         plt.figure(figsize=(12, 6))
 
-        plt.scatter(x_lda[:, 0], x_lda[:, 1], c=y.astype('category').cat.codes, cmap="autumn", alpha=0.7, label='Dati trasformati')
+        #plt.scatter(x_lda[:, 0], x_lda[:, 1], c=y.astype('category').cat.codes, cmap="autumn", alpha=0.7, label='Dati trasformati')
+        plt.scatter(x_lda[:, 0], x_lda[:, 1], c=y_kmeans, cmap="autumn", alpha=0.7, label='Dati trasformati')
         plt.title(f"{titolo}\n{stringa}")
         plt.xlabel(self.lab_x)
         plt.ylabel(self.lab_y)
@@ -86,23 +90,33 @@ class LinearAnalysisClass:
         plt.tight_layout()
         plt.show()
 
+    def kmeans_algorithm(self):
+        return KMeans(n_clusters=2, random_state=42)
+    
     def chart(self, titolo, stringa, data_scaled, a, b, x, lad_d):
+        kmeans = self.kmeans_algorithm()
+        y_kmeans = kmeans.fit_predict(data_scaled)
+
         plt.figure(figsize=(12, 6))
         plt.suptitle(titolo)
 
-        # Dati originali (standardizzati)
+        # Visualizzazione dei cluster
         plt.subplot(1, 2, 1)
-        plt.plot(data_scaled[:, 0], data_scaled[:, 1], color="teal", alpha=0.7, label='Dati originali (standardizzati)')
-        plt.quiver(0, 0, a, b, angles="xy", scale_units="xy", scale=1, label=lad_d)
+        plt.scatter(data_scaled[:, 0], data_scaled[:, 1], c=y_kmeans, cmap='viridis')
+        plt.quiver(0, 0, a, b, angles="xy", scale_units="xy", scale=1, label=lad_d, color="orange")
+        plt.scatter(kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[:, 1], s=300, c='red', marker='X')
         plt.title(stringa)
+        plt.colorbar(label='Clustering con K-Means')
         plt.xlabel(self.lab_x)
         plt.ylabel(self.lab_y)
         plt.legend()
         plt.grid(True)
         # Dati trasformati
         plt.subplot(1, 2, 2)
-        plt.plot(x[:, 0], x[:, 1], color="teal", alpha=0.7, label='Dati trasformati')
+        #plt.plot(x[:, 0], x[:, 1], color="teal", alpha=0.7, label='Dati trasformati')
+        plt.scatter(x[:, 0], x[:, 1], c=y_kmeans, cmap='autumn', label='Dati trasformati')
         plt.title(stringa)
+        plt.colorbar(label='Dati trasformati')
         plt.xlabel(self.lab_x)
         plt.ylabel(self.lab_y)
         plt.legend()
@@ -113,7 +127,7 @@ class LinearAnalysisClass:
         plt.tight_layout()
         plt.show()
 
-
+"""
 roma = LinearAnalysisClass("CSV/linear_analysis/shapes.csv", "città di Roma", "shape_pt_sequence", "shape_dist_traveled")
 roma.analysisPCA("shape_pt_sequence", "shape_dist_traveled")
 roma.analysisICA("shape_pt_sequence", "shape_dist_traveled")
@@ -123,6 +137,7 @@ dublino = LinearAnalysisClass("CSV/linear_analysis/Traffic_Flow_Data_Jan_to_June
 dublino.analysisPCA("flow", "cong")
 dublino.analysisICA("flow", "cong")
 dublino.analysisLDA("flow", "cong", "day")
+"""
 
 e17 = LinearAnalysisClass("CSV/lwr/E17.csv", "Autostrda E17, tunnel Kennedy, Anversa, Belgio ", "Densità", "Velocità")
 e17.analysisPCA("densita", "velocita")
