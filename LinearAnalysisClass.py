@@ -127,7 +127,6 @@ class LinearAnalysisClass:
         plt.tight_layout()
         plt.show()
 
-"""
 roma = LinearAnalysisClass("CSV/linear_analysis/shapes.csv", "città di Roma", "shape_pt_sequence", "shape_dist_traveled")
 roma.analysisPCA("shape_pt_sequence", "shape_dist_traveled")
 roma.analysisICA("shape_pt_sequence", "shape_dist_traveled")
@@ -137,7 +136,6 @@ dublino = LinearAnalysisClass("CSV/linear_analysis/Traffic_Flow_Data_Jan_to_June
 dublino.analysisPCA("flow", "cong")
 dublino.analysisICA("flow", "cong")
 dublino.analysisLDA("flow", "cong", "day")
-"""
 
 e17 = LinearAnalysisClass("CSV/lwr/E17.csv", "Autostrda E17, tunnel Kennedy, Anversa, Belgio ", "Densità", "Velocità")
 e17.analysisPCA("densita", "velocita")
