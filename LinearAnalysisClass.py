@@ -64,8 +64,7 @@ class LinearAnalysisClass:
 
         scaler = StandardScaler()
         data_scaled = scaler.fit_transform(x)
-        kmeans = self.kmeans_algorithm()
-        y_kmeans = kmeans.fit_predict(data_scaled)
+        kmeans = self.kmeans_algorithm(data_scaled)
 
         lda = LDA(n_components=2)
         x_lda = lda.fit_transform(data_scaled, y)
@@ -77,7 +76,7 @@ class LinearAnalysisClass:
         plt.figure(figsize=(12, 6))
 
         #plt.scatter(x_lda[:, 0], x_lda[:, 1], c=y.astype('category').cat.codes, cmap="autumn", alpha=0.7, label='Dati trasformati')
-        plt.scatter(x_lda[:, 0], x_lda[:, 1], c=y_kmeans, cmap="autumn", alpha=0.7, label='Dati trasformati')
+        plt.scatter(x_lda[:, 0], x_lda[:, 1], c=kmeans[1], cmap="autumn", alpha=0.7, label='Dati trasformati')
         plt.title(f"{titolo}\n{stringa}")
         plt.xlabel(self.lab_x)
         plt.ylabel(self.lab_y)
@@ -90,31 +89,34 @@ class LinearAnalysisClass:
         plt.tight_layout()
         plt.show()
 
-    def kmeans_algorithm(self):
-        return KMeans(n_clusters=2, random_state=42)
+    def kmeans_algorithm(self, data_scaled):
+        kmeans = KMeans(n_clusters=2, random_state=42)
+        y_kmeans = kmeans.fit_predict(data_scaled)
+
+        return kmeans, y_kmeans
     
     def chart(self, titolo, stringa, data_scaled, a, b, x, lad_d):
-        kmeans = self.kmeans_algorithm()
-        y_kmeans = kmeans.fit_predict(data_scaled)
+        kmeans = self.kmeans_algorithm(data_scaled)
 
         plt.figure(figsize=(12, 6))
         plt.suptitle(titolo)
 
         # Visualizzazione dei cluster
         plt.subplot(1, 2, 1)
-        plt.scatter(data_scaled[:, 0], data_scaled[:, 1], c=y_kmeans, cmap='viridis')
+        plt.scatter(data_scaled[:, 0], data_scaled[:, 1], c=kmeans[1], cmap='viridis', label='Clustering con K-Means')
         plt.quiver(0, 0, a, b, angles="xy", scale_units="xy", scale=1, label=lad_d, color="orange")
-        plt.scatter(kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[:, 1], s=300, c='red', marker='X')
+        plt.scatter(kmeans[0].cluster_centers_[:, 0], kmeans[0].cluster_centers_[:, 1], s=300, c='red', marker='X')
         plt.title(stringa)
         plt.colorbar(label='Clustering con K-Means')
         plt.xlabel(self.lab_x)
         plt.ylabel(self.lab_y)
         plt.legend()
         plt.grid(True)
+
         # Dati trasformati
         plt.subplot(1, 2, 2)
         #plt.plot(x[:, 0], x[:, 1], color="teal", alpha=0.7, label='Dati trasformati')
-        plt.scatter(x[:, 0], x[:, 1], c=y_kmeans, cmap='autumn', label='Dati trasformati')
+        plt.scatter(x[:, 0], x[:, 1], c=kmeans[1], cmap='autumn', label='Dati trasformati')
         plt.title(stringa)
         plt.colorbar(label='Dati trasformati')
         plt.xlabel(self.lab_x)
